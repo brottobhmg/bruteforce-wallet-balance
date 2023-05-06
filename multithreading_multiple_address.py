@@ -49,7 +49,7 @@ def get_balance(
                 + " from "
                 + provider
             )
-            time.sleep(10)
+            time.sleep(5)
             if not recursive:
                 print("Recursive with " + provider)
                 return get_balance(provider, endpoint, addressList, True)
@@ -71,8 +71,8 @@ def switch(provider: str, json, addressList):
     """
     balance = []
     assert(len(json) == MULTIPLE_ADDRESS_ENDPOINT.get(provider)[1])
-    if provider == "haskoin":
-        for i in range(len(json)): 
+    if provider == "api.haskoin.com":
+        for i in range(len(json)):
             balance.append(json[i]["confirmed"])
 
     elif provider == "api-r.bitcoinchain.com":
@@ -82,12 +82,13 @@ def switch(provider: str, json, addressList):
             except:
                 balance.append(0)
 
-    elif provider == "blockchain.info4":
+    elif provider == "blockchain.info":
         for i in range(len(json)):
             balance.append(json[addressList[i]]["final_balance"])
 
     return balance
 
+@DeprecationWarning
 def createWalletListFromSeedList(seedList):
     walletsList = []
     for seed in seedList:
@@ -100,6 +101,9 @@ def createWalletListFromZero(nAddress):
     walletsList = []
     for _ in range(nAddress):
         walletData = generateWallet.fromZeroToAddress()
+        if type(walletData[1])==bytes:
+            walletData[1]=walletData[1].encode("utf-8")
+        #[0]: private_key ; [1]: public address
         walletsList.append(walletData)
     return walletsList
 
@@ -111,7 +115,7 @@ def task(provider: str):
         #Old Method - It has memory leak !
         #seedList = getRandomSeedListWithSize(nAddress)
         #walletsList=createWalletListFromSeedList(seedList)
-
+        
         walletsList=createWalletListFromZero(nAddress)
         addressList = [wallet[1] for wallet in walletsList]
         balanceList = get_balance(provider, addressList)
