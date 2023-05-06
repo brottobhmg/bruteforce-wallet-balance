@@ -52,7 +52,7 @@ def get_balance(
             time.sleep(5)
             if not recursive:
                 print("Recursive with " + provider)
-                return get_balance(provider, endpoint, addressList, True)
+                return get_balance(provider, addressList, True)
             return [-1 for _ in range(len(addressList))]
 
         response = response.json()
