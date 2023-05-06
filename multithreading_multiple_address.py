@@ -102,7 +102,7 @@ def createWalletListFromZero(nAddress):
     for _ in range(nAddress):
         walletData = generateWallet.fromZeroToAddress()
         if type(walletData[1])==bytes:
-            walletData[1]=walletData[1].encode("utf-8")
+            walletData[1]=str(walletData[1])
         #[0]: private_key ; [1]: public address
         walletsList.append(walletData)
     return walletsList
