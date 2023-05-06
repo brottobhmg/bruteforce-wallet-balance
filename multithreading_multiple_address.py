@@ -101,6 +101,7 @@ def createWalletListFromZero(nAddress):
     walletsList = []
     for _ in range(nAddress):
         walletData = generateWallet.fromZeroToAddress()
+        print(type(walletData[1]))
         if type(walletData[1])==bytes:
             walletData[1]=str(walletData[1])
         #[0]: private_key ; [1]: public address
