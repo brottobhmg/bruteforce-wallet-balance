@@ -99,12 +99,12 @@ def createWalletListFromZero(nAddress):
     walletsList = []
     for _ in range(nAddress):
         walletData = generateWallet.fromZeroToAddress()
-        print(type(walletData[1]))
+        #print(type(walletData[1]))
         if type(walletData[1])==bytes:
             walletData[1]=str(walletData[1])
-            print("modificato")
+            #print("modificato")
         #[0]: private_key ; [1]: public address
-        assert(type(walletData[1])==str)
+        #assert(type(walletData[1])==str)
         walletsList.append(walletData)
     return walletsList
 
