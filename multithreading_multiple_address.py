@@ -86,25 +86,13 @@ def switch(provider: str, json, addressList):
 
     return balance
 
-#from pywallet import wallet
-#def createWalletListFromSeedList(seedList):
-#    walletsList = []
-#    for seed in seedList:
-#        assert (type(seed) == str)
-#        walletData = wallet.create_address("btc",seed,0)
-#        walletsList.append(walletData)
-#    return walletsList
-
 def createWalletListFromZero(nAddress):
     walletsList = []
     for _ in range(nAddress):
         walletData = generateWallet.fromZeroToAddress()
-        #print(type(walletData[1]))
         if type(walletData[1])==bytes:
-            walletData[1]=str(walletData[1])
-            #print("modificato")
+            walletData[1]=walletData[1].decode()
         #[0]: private_key ; [1]: public address
-        #assert(type(walletData[1])==str)
         walletsList.append(walletData)
     return walletsList
 
@@ -112,15 +100,10 @@ def task(provider: str):
     global count
     nAddress=MULTIPLE_ADDRESS_ENDPOINT.get(provider)[1]
     while True:
-
-        #Old Method - It has memory leak !
-        #seedList = getRandomSeedListWithSize(nAddress)
-        #walletsList=createWalletListFromSeedList(seedList)
         
         walletsList=createWalletListFromZero(nAddress)
         addressList = [wallet[1] for wallet in walletsList]
         balanceList = get_balance(provider, addressList)
-
 
         for i, balance in enumerate(balanceList):
             if balance != -1 and balance != 0.00000000000000000:
