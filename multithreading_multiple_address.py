@@ -1,7 +1,5 @@
 import os
 import sys
-from pywallet import wallet
-from seed_create import getRandomSeedListWithSize
 from requests import get
 import certifi
 import threading
@@ -88,14 +86,14 @@ def switch(provider: str, json, addressList):
 
     return balance
 
-@DeprecationWarning
-def createWalletListFromSeedList(seedList):
-    walletsList = []
-    for seed in seedList:
-        assert (type(seed) == str)
-        walletData = wallet.create_address("btc",seed,0)
-        walletsList.append(walletData)
-    return walletsList
+#from pywallet import wallet
+#def createWalletListFromSeedList(seedList):
+#    walletsList = []
+#    for seed in seedList:
+#        assert (type(seed) == str)
+#        walletData = wallet.create_address("btc",seed,0)
+#        walletsList.append(walletData)
+#    return walletsList
 
 def createWalletListFromZero(nAddress):
     walletsList = []
@@ -104,7 +102,9 @@ def createWalletListFromZero(nAddress):
         print(type(walletData[1]))
         if type(walletData[1])==bytes:
             walletData[1]=str(walletData[1])
+            print("modificato")
         #[0]: private_key ; [1]: public address
+        assert(type(walletData[1])==str)
         walletsList.append(walletData)
     return walletsList
 
