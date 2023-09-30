@@ -17,7 +17,7 @@ MULTIPLE_ADDRESS_ENDPOINT = {
 The number after "url endpoint" is the number of address that append to link when make the request. If your endpoint support only one address per request put 1.
 
 ## Don't have API keys ?
-There is three free keys inside the .exe file.
+The .exe file in releases page have three free api without limit.
 
 ## Setup
 Run ```pip install name_module``` to install missing modules
