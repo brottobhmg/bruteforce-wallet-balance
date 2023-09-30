@@ -16,14 +16,16 @@ MULTIPLE_ADDRESS_ENDPOINT = {
 ```
 The number after "url endpoint" is the number of address that append to link when make the request. If your endpoint support only one address per request put 1.
 
-## A lot of API key
-You can add many API to search in more thread
+## Don't have API keys ?
+There is three free keys inside the .exe file.
 
 ## Setup
 Run ```pip install name_module``` to install missing modules
 
 ## Start
 ```python3 multithreading_multiple_address.py```
+or
+```multithreading_multiple_address.exe```
 
 ## Run on aarch64
 Run it on low istance on AWS or raspberry pi 4b can not work, sometimes it throw this error ***ValueError: unsupported hash type ripemd160***
